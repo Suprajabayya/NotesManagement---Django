@@ -1,0 +1,780 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Note</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background: #f7f8ff;
+
+            min-height: 100vh;
+
+            color: #292c48;
+
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+
+            height: 72px;
+
+            background: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            border-bottom: 1px solid #e8e7f4;
+
+            box-shadow:
+                0 3px 15px rgba(60, 55, 130, 0.05);
+
+        }
+
+
+        .logo {
+
+            text-decoration: none;
+
+            color: #574dc4;
+
+            font-size: 21px;
+
+            font-weight: 700;
+
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .nav-btn {
+
+            text-decoration: none;
+
+            padding: 9px 15px;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+        }
+
+
+        .home-btn {
+
+            color: #625b8d;
+
+            background: #f1f0fa;
+
+        }
+
+
+        .home-btn:hover {
+
+            background: #e8e6f7;
+
+        }
+
+
+        .notes-btn {
+
+            color: white;
+
+            background: linear-gradient(
+                135deg,
+                #665bdd,
+                #4d78d2
+            );
+
+            box-shadow:
+                0 5px 14px rgba(91, 82, 202, 0.18);
+
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .page {
+
+            width: 90%;
+
+            max-width: 850px;
+
+            margin: 45px auto 70px;
+
+        }
+
+
+        /* ================= HEADING ================= */
+
+        .heading {
+
+            text-align: center;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .heading-icon {
+
+            width: 62px;
+
+            height: 62px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 15px;
+
+            background: #eeecff;
+
+            border-radius: 17px;
+
+            font-size: 31px;
+
+        }
+
+
+        .heading h1 {
+
+            margin: 0 0 8px;
+
+            color: #292c48;
+
+            font-size: 29px;
+
+        }
+
+
+        .heading p {
+
+            margin: 0;
+
+            color: #85899f;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ================= FORM CARD ================= */
+
+        .form-card {
+
+            background: white;
+
+            padding: 32px 38px;
+
+            border-radius: 17px;
+
+            border: 1px solid #e9e8f5;
+
+            box-shadow:
+                0 12px 35px rgba(53, 48, 125, 0.08);
+
+        }
+
+
+        /* ================= MESSAGE ================= */
+
+        .message {
+
+            background: #fff1f3;
+
+            color: #c34859;
+
+            border: 1px solid #ffdadd;
+
+            padding: 11px 14px;
+
+            border-radius: 8px;
+
+            margin-bottom: 20px;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ================= FORM GRID ================= */
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 20px;
+
+        }
+
+
+        .field {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .full {
+
+            grid-column: 1 / -1;
+
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #454960;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+        }
+
+
+        .label-icon {
+
+            margin-right: 5px;
+
+        }
+
+
+        input,
+        select,
+        textarea {
+
+            width: 100%;
+
+            padding: 12px 13px;
+
+            border: 1px solid #ddddec;
+
+            border-radius: 8px;
+
+            background: #fafaff;
+
+            color: #383b52;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.2s;
+
+        }
+
+
+        input::placeholder,
+        textarea::placeholder {
+
+            color: #a0a3b3;
+
+        }
+
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+
+            background: white;
+
+            border-color: #766ce0;
+
+            box-shadow:
+                0 0 0 3px rgba(118, 108, 224, 0.10);
+
+        }
+
+
+        select {
+
+            cursor: pointer;
+
+        }
+
+
+        textarea {
+
+            min-height: 150px;
+
+            resize: vertical;
+
+            line-height: 1.6;
+
+        }
+
+
+        .answer-box {
+
+            min-height: 190px;
+
+        }
+
+
+        /* ================= BUTTONS ================= */
+
+        .button-area {
+
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 5px;
+
+        }
+
+
+        .save-btn {
+
+            flex: 1;
+
+            border: none;
+
+            padding: 13px;
+
+            border-radius: 8px;
+
+            background: linear-gradient(
+                135deg,
+                #665bdd,
+                #4d78d2
+            );
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 7px 18px rgba(91, 82, 202, 0.20);
+
+        }
+
+
+        .save-btn:hover {
+
+            opacity: 0.93;
+
+        }
+
+
+        .cancel-btn {
+
+            text-decoration: none;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 13px 22px;
+
+            border-radius: 8px;
+
+            background: #f1f0fa;
+
+            color: #5e5a82;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+        }
+
+
+        .cancel-btn:hover {
+
+            background: #e8e6f7;
+
+        }
+
+
+        /* ================= TIP ================= */
+
+        .tip {
+
+            margin-top: 20px;
+
+            padding: 13px 15px;
+
+            background: #f5f4ff;
+
+            border: 1px solid #e5e2ff;
+
+            border-radius: 8px;
+
+            color: #716c9c;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            background: #252842;
+
+            color: #b9bad0;
+
+            text-align: center;
+
+            padding: 24px;
+
+            font-size: 13px;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+
+        <a href="{% url 'home' %}"
+           class="logo">
+
+            📚 Notes Management
+
+        </a>
+
+
+        <div class="nav-links">
+
+
+            <a href="{% url 'home' %}"
+               class="nav-btn home-btn">
+
+                🏠 Home
+
+            </a>
+
+
+            <a href="{% url 'notes' %}"
+               class="nav-btn notes-btn">
+
+                📖 My Notes
+
+            </a>
+
+
+        </div>
+
+
+    </nav>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="page">
+
+
+        <!-- HEADING -->
+
+        <div class="heading">
+
+
+            <div class="heading-icon">
+                ✍️
+            </div>
+
+
+            <h1>
+                Create a New Note
+            </h1>
+
+
+            <p>
+                Add a question and answer to build
+                your personal knowledge base.
+            </p>
+
+
+        </div>
+
+
+
+        <!-- FORM -->
+
+        <div class="form-card">
+
+
+            {% if messages %}
+
+                {% for i in messages %}
+
+                    <p class="message">
+                        ⚠️ {{ i }}
+                    </p>
+
+                {% endfor %}
+
+            {% endif %}
+
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+
+                <div class="form-grid">
+
+
+                    <!-- LANGUAGE -->
+
+                    <div class="field">
+
+                        <label>
+
+                            <span class="label-icon">
+                                💻
+                            </span>
+
+                            Language
+
+                        </label>
+
+
+                        <select name="language">
+
+                            <option value="">
+                                Select Language
+                            </option>
+
+
+                            <option value="Python">
+                                🐍 Python
+                            </option>
+
+
+                            <option value="Data Analytics">
+                                📊 Data Analytics
+                            </option>
+
+
+                            <option value="JavaScript">
+                                ⚡ JavaScript
+                            </option>
+
+
+                            <option value="HTML">
+                                🌐 HTML
+                            </option>
+
+
+                            <option value="CSS">
+                                🎨 CSS
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- TOPIC -->
+
+                    <div class="field">
+
+                        <label>
+
+                            <span class="label-icon">
+                                📌
+                            </span>
+
+                            Topic
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            name="topic"
+                            placeholder="Example: Python Lists"
+                        >
+
+                    </div>
+
+
+
+                    <!-- QUESTION -->
+
+                    <div class="field full">
+
+                        <label>
+
+                            <span class="label-icon">
+                                ❓
+                            </span>
+
+                            Question
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            name="question"
+                            placeholder="Example: What is a list in Python?"
+                        >
+
+                    </div>
+
+
+
+                    <!-- ANSWER -->
+
+                    <div class="field full">
+
+                        <label>
+
+                            <span class="label-icon">
+                                💡
+                            </span>
+
+                            Answer
+
+                        </label>
+
+
+                        <textarea
+                            name="answer"
+                            class="answer-box"
+                            placeholder="Write your explanation, examples or important points here..."
+                        ></textarea>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- BUTTONS -->
+
+                <div class="button-area">
+
+
+                    <a href="{% url 'notes' %}"
+                       class="cancel-btn">
+
+                        ← Cancel
+
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="save-btn">
+
+                        💾 Save Note
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+
+            <!-- TIP -->
+
+            <div class="tip">
+
+                💡 <strong>Study Tip:</strong>
+                Write questions in your own words
+                and keep answers short, clear and easy
+                to revise.
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        📚 Notes Management
+        &nbsp; • &nbsp;
+        Learn. Prepare. Revise. 🚀
+
+    </footer>
+
+
+</body>
+
+</html>

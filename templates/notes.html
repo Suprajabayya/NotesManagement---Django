@@ -1,0 +1,786 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Notes</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background: #f7f8ff;
+
+            color: #252942;
+              min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+
+            height: 72px;
+
+            background: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            border-bottom: 1px solid #e8e7f4;
+
+            box-shadow:
+                0 3px 15px rgba(60, 55, 130, 0.05);
+        }
+
+
+        .logo {
+
+            text-decoration: none;
+
+            color: #574dc4;
+
+            font-size: 21px;
+
+            font-weight: 700;
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .nav-btn {
+
+            text-decoration: none;
+
+            padding: 9px 15px;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        .home-btn {
+
+            color: #625b8d;
+
+            background: #f1f0fa;
+        }
+
+
+        .home-btn:hover {
+
+            background: #e8e6f7;
+        }
+
+
+        .add-btn {
+
+            color: white;
+
+            background: linear-gradient(
+                135deg,
+                #665bdd,
+                #4d78d2
+            );
+
+            box-shadow:
+                0 5px 14px rgba(91, 82, 202, 0.18);
+        }
+
+
+        .add-btn:hover {
+
+            opacity: 0.92;
+        }
+
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+
+            width: 94%;
+
+            max-width: 1250px;
+
+            margin: 50px auto 70px;
+            flex: 1;
+        }
+
+
+        /* ================= HEADING ================= */
+
+        .page-heading {
+
+            margin-bottom: 25px;
+        }
+
+
+        .page-heading h1 {
+
+            margin: 0 0 7px;
+
+            font-size: 30px;
+
+            color: #292c48;
+        }
+
+
+        .page-heading p {
+
+            margin: 0;
+
+            color: #85899f;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= MESSAGE ================= */
+
+        .message {
+
+            background: #edf9f2;
+
+            color: #26804b;
+
+            border: 1px solid #d3efdd;
+
+            padding: 11px 15px;
+
+            border-radius: 8px;
+
+            margin-bottom: 20px;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= TABLE ================= */
+
+        .table-container {
+
+            background: white;
+
+            padding: 8px;
+
+            border-radius: 15px;
+
+            border: 1px solid #e9e8f5;
+
+            box-shadow:
+                0 10px 30px rgba(53, 48, 125, 0.07);
+
+            overflow-x: auto;
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: separate;
+
+            border-spacing: 0;
+
+            min-width: 1000px;
+        }
+
+
+        th {
+
+            background: #5a50c7;
+
+            color: white;
+
+            padding: 15px;
+
+            text-align: left;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        th:first-child {
+
+            border-radius: 9px 0 0 0;
+        }
+
+
+        th:last-child {
+
+            border-radius: 0 9px 0 0;
+        }
+
+
+        td {
+
+            padding: 15px;
+
+            border-bottom: 1px solid #eeeeF5;
+
+            color: #53586d;
+
+            font-size: 14px;
+
+            vertical-align: top;
+        }
+
+
+        tr:last-child td {
+
+            border-bottom: none;
+        }
+
+
+        tbody tr:hover {
+
+            background: #fafaff;
+        }
+
+
+        /* ================= LANGUAGE ================= */
+
+        .language {
+
+            display: inline-block;
+
+            padding: 6px 10px;
+
+            border-radius: 20px;
+
+            background: #efedff;
+
+            color: #574dc4;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            white-space: nowrap;
+        }
+
+
+        /* ================= TOPIC ================= */
+
+        .topic {
+
+            color: #34384f;
+
+            font-weight: 600;
+
+            white-space: nowrap;
+        }
+
+
+        /* ================= QUESTION ================= */
+
+        .question {
+
+            color: #555a70;
+
+            line-height: 1.5;
+
+            max-width: 260px;
+        }
+
+
+        /* ================= ANSWER ================= */
+
+        .answer {
+
+            color: #6e7387;
+
+            line-height: 1.5;
+
+            max-width: 300px;
+
+            /* Keep long answers from making the table huge */
+
+            display: -webkit-box;
+
+            -webkit-line-clamp: 3;
+
+            -webkit-box-orient: vertical;
+
+            overflow: hidden;
+        }
+
+
+        /* ================= ACTIONS ================= */
+
+        .actions {
+
+            display: flex;
+
+            gap: 6px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .action {
+
+            text-decoration: none;
+
+            padding: 7px 11px;
+
+            border-radius: 6px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            white-space: nowrap;
+        }
+
+
+        .view {
+
+            background: #eaf3ff;
+
+            color: #3674ba;
+        }
+
+
+        .view:hover {
+
+            background: #dcecff;
+        }
+
+
+        .edit {
+
+            background: #f0edff;
+
+            color: #5b50c6;
+        }
+
+
+        .edit:hover {
+
+            background: #e5e1ff;
+        }
+
+
+        .delete {
+
+            background: #fff0f2;
+
+            color: #d14d5c;
+        }
+
+
+        .delete:hover {
+
+            background: #ffe1e5;
+        }
+
+
+        /* ================= EMPTY ================= */
+
+        .empty {
+
+            text-align: center;
+
+            padding: 55px 20px !important;
+
+            color: #8a8ea1;
+        }
+
+
+        .empty-icon {
+
+            font-size: 42px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .empty h3 {
+
+            margin: 0 0 7px;
+
+            color: #4b4f65;
+
+            font-size: 17px;
+        }
+
+
+        .empty p {
+
+            margin: 0;
+
+            font-size: 13px;
+
+            color: #9094a7;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            background: #252842;
+            color: #b9bad0;
+            text-align: center;
+            padding: 24px;
+            font-size: 13px;
+
+            margin-top: auto;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+
+        <a href="{% url 'home' %}"
+           class="logo">
+
+            📚 Notes Management
+
+        </a>
+
+
+        <div class="nav-links">
+
+
+            <a href="{% url 'home' %}"
+               class="nav-btn home-btn">
+
+                🏠 Home
+
+            </a>
+
+
+            <a href="{% url 'addnote' %}"
+               class="nav-btn add-btn">
+
+                ✨ Add Note
+
+            </a>
+
+
+        </div>
+
+
+    </nav>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="container">
+
+
+        <div class="page-heading">
+
+            <h1>
+                📖 My Notes
+            </h1>
+
+            <p>
+                View, edit and manage all your
+                questions and answers.
+            </p>
+
+        </div>
+
+
+
+        <!-- MESSAGES -->
+
+        {% if messages %}
+
+            {% for i in messages %}
+
+                <p class="message">
+                    ✓ {{ i }}
+                </p>
+
+            {% endfor %}
+
+        {% endif %}
+
+
+
+        <!-- TABLE -->
+
+        <div class="table-container">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Language
+                        </th>
+
+                        <th>
+                            Topic
+                        </th>
+
+                        <th>
+                            Question
+                        </th>
+
+                        <th>
+                            Answer
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+
+                <tbody>
+
+
+                    {% for i in aa %}
+
+
+                    <tr>
+
+
+                        <!-- LANGUAGE -->
+
+                        <td>
+
+                            <span class="language">
+
+                                {% if i.language == "Python" %}
+
+                                    🐍
+
+                                {% elif i.language == "JavaScript" %}
+
+                                    ⚡
+
+                                {% elif i.language == "HTML" %}
+
+                                    🌐
+
+                                {% elif i.language == "CSS" %}
+
+                                    🎨
+
+                                {% elif i.language == "Data Analytics" %}
+
+                                    📊
+
+                                {% else %}
+
+                                    📚
+
+                                {% endif %}
+
+                                {{ i.language }}
+
+                            </span>
+
+                        </td>
+
+
+
+                        <!-- TOPIC -->
+
+                        <td>
+
+                            <span class="topic">
+
+                                {{ i.topic }}
+
+                            </span>
+
+                        </td>
+
+
+
+                        <!-- QUESTION -->
+
+                        <td>
+
+                            <div class="question">
+
+                                {{ i.question }}
+
+                            </div>
+
+                        </td>
+
+
+
+                        <!-- ANSWER -->
+
+                        <td>
+
+                            <div class="answer">
+
+                                {{ i.answer }}
+
+                            </div>
+
+                        </td>
+
+
+
+                        <!-- ACTIONS -->
+
+                        <td>
+
+                            <div class="actions">
+
+
+                                <a
+                                    href="{% url 'viewnote' i.id %}"
+                                    class="action view">
+
+                                    👁 View
+
+                                </a>
+
+
+                                <a
+                                    href="{% url 'editnote' i.id %}"
+                                    class="action edit">
+
+                                    ✏️ Edit
+
+                                </a>
+
+
+                                <a
+                                    href="{% url 'deletenote' i.id %}"
+                                    class="action delete">
+
+                                    🗑 Delete
+
+                                </a>
+
+
+                            </div>
+
+                        </td>
+
+
+                    </tr>
+
+
+                    {% empty %}
+
+
+                    <tr>
+
+                        <td colspan="5"
+                            class="empty">
+
+
+                            <div class="empty-icon">
+                                📝
+                            </div>
+
+
+                            <h3>
+                                No Notes Yet
+                            </h3>
+
+
+                            <p>
+                                Start creating your first
+                                question and answer.
+                            </p>
+
+
+                        </td>
+
+                    </tr>
+
+
+                    {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+    <div>
+        📚 <strong>Notes Management</strong>
+    </div>
+
+    <div style="margin-top: 7px;">
+        Learn. Prepare. Revise. 🚀
+    </div>
+
+    </footer>
+
+
+</body>
+
+</html>
